@@ -11,6 +11,8 @@ namespace FormSolution.Controllers
     {
         public ActionResult Index()
         {
+
+            //Creating list from database model "country"
             List<SelectItem> lst = null;
 
             using (Models.DatabaseEntities1 db = new Models.DatabaseEntities1())
@@ -23,6 +25,7 @@ namespace FormSolution.Controllers
                                      }).ToList();
             }
 
+            //Creating list of <SelectListItem> by giving values from the created list "lst"
             List<SelectListItem> items = lst.ConvertAll(
                 d =>
                 {
@@ -34,6 +37,8 @@ namespace FormSolution.Controllers
                     };
                 });
 
+
+            //Creating ViewBag that is going to be passed to the view later with all the countries in it
             ViewBag.items = items;
 
             return View();
