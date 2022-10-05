@@ -1,0 +1,42 @@
+﻿@model FormSolution.Models.Country
+
+@{ 
+    List<SelectListItem> items = (List<SelectListItem>) ViewBag.items;
+}
+
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @action = "http://vip.groupehn.com:20003/html/infospost.php" }))
+{
+
+    <div class="form-horizontal">
+        <hr />
+
+        <h1>Database Form Solution</h1><br />
+
+        <div class="col-md-10" style="margin-top:15px;">
+            <input class="form-control" placeholder="LAST NAME" name="lastname" required>
+        </div><br /><br />
+        <div class="col-md-10" style="margin-top: 15px;">
+            <input class="form-control" placeholder="FIRST NAME" name="firstname" required>
+        </div><br />
+        <div class="col-md-10" style="margin-top: 15px">
+            <input class="form-control" type="email" placeholder="MAIL" name="mail" required>
+        </div><br />
+        <div class="col-md-10" style="margin-top: 5px;">
+            <p style="color: white; font-weight:bold;">MESSAGE:</p>
+            <textarea class="form-control" name="request" id="request" cols="66"
+                      rows="10" placeholder="MESSAGE" required></textarea>
+        </div>
+        <div class="col-md-10" style="margin-top:10px;">
+            @Html.DropDownList("country", items, "Select a country", new { @class = "form-control", @required = true })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            
+            <br />
+            <input type="submit" value="Send Form" class="btn btn-success" style="width: 100%;"/>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
